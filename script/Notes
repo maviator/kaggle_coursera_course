@@ -1,0 +1,22 @@
+- Validation set is the last month in train data
+- Correct validation scheme is set with RMSE calculation
+- Clipping values in the [0 20] range
+
+- Method 0: Use last month sales as predictions.
+
+- Method 1: Train lightgbm using last month sales. Maybe last month predictions is a leak for months 33 to 34 but not 32 to 33?
+
+- Method 2: Train lightgbm on average sales of all train data.
+
+- Method 3: Grid search for parameters for lgbm on average sales of all train data
+
+
+Method     RMSE1     RMSE2     RMSE3     RMSE4     RMSE5     RMSEavg     LB
+0          2.90437   2.68941   2.15416   2.06606   2.34019   2.43029     1.16777
+1          2.73800   2.62511   2.19453   2.07450   2.48452   2.42333     2.51976
+2          3.03090   3.06456   2.59590   2.48143   2.70089   2.77473     1.22460
+3          3.00559   3.00930   2.54801   2.44268   2.65894               2.61265
+
+0: 14.3829, 18.06783, 4.98785, 4.95521, 5.53600, LB: 1.16777
+1: 14.3601, 18.17433, 5.07110, 5.01627, 5.65747, LB: 2.51976
+2: 14.6401, 18.54710, 5.55210, 5.48274, 6.06442, LB: 1.22460 
